@@ -63,7 +63,7 @@ int main(int argc, char **argv)
 	check("(element '(1 2) 0)", "1");
 	check("(element '(1 2) 1)", "2");
 
-	printf(" %d tests, %d failed, %d errors.\n", check_count, fail_count, error_count);
+	printf(" %s: %d tests, %d failed, %d errors.\n", argv[0], check_count, fail_count, error_count);
 	if (fail_count == 0 && error_count == 0)
 		exit(0);
 	else

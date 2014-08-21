@@ -469,9 +469,8 @@ range are approached.
 
 \vest An implementation of Scheme must support exact integers
 throughout the range of numbers that may be used for indexes of
-lists, vectors, and strings or that may result from computing the length of a
-list, vector, or string.  The \ide{length} and \ide{vector-length} procedures
-must return an exact
+lists and vectors or that may result from computing the length of a
+list or vector.  The \ide{length} procedure must return an exact
 integer, and it is an error to use anything but an exact integer as an
 index.  Furthermore any integer constant within the index range, if
 expressed by an exact integer syntax, will indeed be read as an exact
@@ -1353,6 +1352,24 @@ in programs.
 
 \end{entry}
 
+\subsection{Sequences}
+\label{sequencesection}
+
+Moreso provides procedures which operate on a general \defining{sequence}
+(either a well-formed list or a vector).
+
+\begin{entry}{%
+\proto{length}{ sequence}{library procedure}}
+
+Returns the length of \var{sequence}.
+
+\begin{scheme}
+(length '(a b c))               \ev  3
+(length '\#(a b))               \ev  2
+(length '(a (b) (c d e)))       \ev  3
+(length '())                    \ev  0%
+\end{scheme}
+\end{entry}
  
 \subsection{Pairs and lists}
 \label{listsection}
@@ -1630,20 +1647,6 @@ Returns a newly allocated list of its arguments.
 \begin{scheme}
 (list 'a (+ 3 4) 'c)            \ev  (a 7 c)
 (list)                          \ev  ()%
-\end{scheme}
-\end{entry}
-
-
-\begin{entry}{%
-\proto{length}{ list}{library procedure}}
-
-\nodomain{\var{List} must be a list.}
-Returns the length of \var{list}.
-
-\begin{scheme}
-(length '(a b c))               \ev  3
-(length '(a (b) (c d e)))       \ev  3
-(length '())                    \ev  0%
 \end{scheme}
 \end{entry}
 
@@ -2158,13 +2161,6 @@ arguments.  Analogous to {\cf list}.
 
 
 \begin{entry}{%
-\proto{vector-length}{ vector}{procedure}}
-
-Returns the number of elements in \var{vector} as an exact integer.
-\end{entry}
-
-
-\begin{entry}{%
 \proto{vector-ref}{ vector k}{procedure}}
 
 \domain{\vr{k} must be a valid index of \var{vector}.}
@@ -2246,7 +2242,7 @@ The value returned by {\cf vector-fill!}\ is unspecified.  % <!>
 
 \domain{\var{Vector} must be a vector, and \var{start} and \var{end}
 must be exact integers satisfying
-$$0 \leq \var{start} \leq \var{end} \leq \hbox{\tt(vector-length \var{vector})\rm.}$$}
+$$0 \leq \var{start} \leq \var{end} \leq \hbox{\tt(length \var{vector})\rm.}$$}
 {\cf Subvector} returns a newly allocated vector formed from the elements of
 \var{vector} beginning with index \var{start} (inclusive) and ending with index
 \var{end} (exclusive).

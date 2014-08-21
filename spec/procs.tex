@@ -1371,6 +1371,24 @@ Returns the length of \var{sequence}.
 \end{scheme}
 \end{entry}
  
+\begin{entry}{%
+\proto{element}{ sequence k}{procedure}}
+
+\domain{\vr{k} must be a valid index of \var{sequence}.}
+{\cf Element} returns element \vr{k} of \var{sequence}.
+
+\begin{scheme}
+(element '\#(1 1 2 3 5 8 13 21)
+         5)  \lev  8
+(element '(1 1 2 3 5 8 13 21)
+         (let ((i (round (* 2 (acos -1)))))
+           (if (inexact? i)
+             (inexact->exact i)
+             i))) \lev 13%
+\end{scheme}
+\end{entry}
+
+
 \subsection{Pairs and lists}
 \label{listsection}
 
@@ -1705,38 +1723,6 @@ elements.  It is an error if \var{list} has fewer than \vr{k} elements.
         (list-tail (cdr x) (- k 1)))))%
 \end{scheme} 
 \end{entry}
-
-
-\begin{entry}{%
-\proto{list-ref}{ list \vr{k}}{library procedure}}
-
-Returns the \vr{k}th element of \var{list}.  (This is the same
-as the car of {\tt(list-tail \var{list} \vr{k})}.)
-It is an error if \var{list} has fewer than \vr{k} elements.
-
-\begin{scheme}
-(list-ref '(a b c d) 2)                 \ev  c
-(list-ref '(a b c d)
-          (inexact->exact (round 1.8))) \lev  c%
-\end{scheme}
-\end{entry}
-
-
-%\begin{entry}{%
-%\proto{last-pair}{ list}{library procedure}}
-%
-%Returns the last pair in the nonempty, possibly improper, list \var{list}.
-%{\cf Last-pair} could be defined by
-%
-%\begin{scheme}
-%(define last-pair
-%  (lambda (x)
-%    (if (pair? (cdr x))
-%        (last-pair (cdr x))
-%        x)))%
-%\end{scheme} 
-% 
-%\end{entry}
 
 
 \begin{entry}{%
@@ -2156,25 +2142,6 @@ arguments.  Analogous to {\cf list}.
 
 \begin{scheme}
 (vector 'a 'b 'c)               \ev  \#(a b c)%
-\end{scheme}
-\end{entry}
-
-
-\begin{entry}{%
-\proto{vector-ref}{ vector k}{procedure}}
-
-\domain{\vr{k} must be a valid index of \var{vector}.}
-{\cf Vector-ref} returns the contents of element \vr{k} of
-\var{vector}.
-
-\begin{scheme}
-(vector-ref '\#(1 1 2 3 5 8 13 21)
-            5)  \lev  8
-(vector-ref '\#(1 1 2 3 5 8 13 21)
-            (let ((i (round (* 2 (acos -1)))))
-              (if (inexact? i)
-                  (inexact->exact i)
-                  i))) \lev 13%
 \end{scheme}
 \end{entry}
 

@@ -185,11 +185,11 @@ If \var{category} is ``procedure'', then the entry describes a procedure, and
 the header line gives a template for a call to the procedure.  Argument
 names in the template are \var{italicized}.  Thus the header line
 
-\noindent\pproto{(vector-ref \var{vector} \var{k})}{procedure}\unpenalty
+\noindent\pproto{(element \var{sequence} \var{k})}{procedure}\unpenalty
 
-indicates that the built-in procedure {\tt vector-ref} takes
-two arguments, a vector \var{vector} and an exact non-negative integer
-\var{k} (see below).  The header lines
+indicates that the built-in procedure {\tt element} takes
+two arguments, a vector or list \var{sequence} and an exact non-negative
+integer \var{k} (see below).  The header lines
 
 \noindent%
 \pproto{(make-vector \var{k})}{procedure}
@@ -201,22 +201,22 @@ either one or two arguments.
 \label{typeconventions}
 It is an error for an operation to be presented with an argument that it
 is not specified to handle.  For succinctness, we follow the convention
-that if an argument name is also the name of a type listed in
-section~\ref{disjointness}, then that argument must be of the named type.
-For example, the header line for {\tt vector-ref} given above dictates that the
-first argument to {\tt vector-ref} must be a vector.  The following naming
-conventions also imply type restrictions:
-\newcommand{\foo}[1]{\vr{#1}, \vri{#1}, $\ldots$ \vrj{#1}, $\ldots$}
+that an argument's name may indicate the argument's type.  For example, the
+header line for {\tt element} given above dictates that the first argument
+to {\tt element} must be a sequence.  The following naming conventions imply
+type restrictions:
 $$
 \begin{tabular}{ll}
 \var{obj}&any object\\
-\foo{list}&list (see section~\ref{listsection})\\
-\foo{z}&complex number\\
-\foo{x}&real number\\
-\foo{y}&real number\\
-\foo{q}&rational number\\
-\foo{n}&integer\\
-\foo{k}&exact non-negative integer\\
+\var{list}&list (see section~\ref{listsection})\\
+\var{string}&string (see section~\ref{stringsection})\\
+\var{sequence}&sequence (see section~\ref{sequencesection})\\
+\var{z}&complex number\\
+\var{x}&real number\\
+\var{y}&real number\\
+\var{q}&rational number\\
+\var{n}&integer\\
+\var{k}&exact non-negative integer\\
 \end{tabular}
 $$
 

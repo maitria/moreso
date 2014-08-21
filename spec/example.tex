@@ -59,7 +59,7 @@ produces a new system state.
         (length (car vectors))
         (lambda (i)
           (apply f
-                 (map (lambda (v) (vector-ref  v i))
+                 (map (lambda (v) (element  v i))
                       vectors)))))))
 
 %|--------------------------------------------------|
@@ -113,8 +113,8 @@ which models a damped oscillator.
 (define damped-oscillator
   (lambda (R L C)
     (lambda (state)
-      (let ((Vc (vector-ref state 0))
-            (Il (vector-ref state 1)))
+      (let ((Vc (element state 0))
+            (Il (element state 1)))
         (vector (- 0 (+ (/ Vc (* R C)) (/ Il C)))
                 (/ Vc L))))))
 

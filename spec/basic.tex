@@ -156,11 +156,10 @@ example, denotes as many locations as there are characters in the string.
 stored into one of these locations using the {\tt vector-set!} procedure, but
 the string continues to denote the same locations as before.
 
-An object fetched from a location, by a variable reference or by
-a procedure such as {\cf car} or {\cf vector-ref} is
-equivalent in the sense of \ide{eqv?} % and \ide{eq?} ??
-(section~\ref{equivalencesection})
-to the object last stored in the location before the fetch.
+An object fetched from a location, by a variable reference or by a procedure
+such as {\cf car} or {\cf element} is equivalent in the sense of \ide{eqv?}
+(section~\ref{equivalencesection}) to the object last stored in the location
+before the fetch.
 
 Every location is marked to show whether it is in use.
 No variable or object ever refers to a location that is not in use.

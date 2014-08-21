@@ -1389,6 +1389,23 @@ Returns the length of \var{sequence}.
 \end{entry}
 
 
+\begin{entry}{%
+\proto{set-element!}{ sequence k obj}{procedure}}
+
+\domain{\vr{k} must be a valid index of \var{sequence}.}
+{\cf Set-element!} stores \var{obj} in slot \vr{k} of \var{sequence}.
+The value returned by {\cf set-element!}\ is unspecified.  % <!>
+
+\begin{scheme}
+(let ((vec (vector 0 '(2 2 2 2) "Anna")))
+  (set-element! vec 1 '("Sue" "Sue"))
+  vec)      \lev  \#(0 ("Sue" "Sue") "Anna")
+
+(set-element! '\#(0 1 2) 1 "doe")  \lev  \scherror  ; constant vector%
+\end{scheme}
+\end{entry}
+
+
 \subsection{Pairs and lists}
 \label{listsection}
 
@@ -1853,7 +1870,7 @@ case---some implementations will prefer upper case, others lower case.
 If the symbol was returned by {\cf string\coerce{}symbol}, the case of
 characters in the string returned will be the same as the case in the
 string that was passed to {\cf string\coerce{}symbol}.  It is an error
-to apply mutation procedures like \ide{vector-set!} to strings returned
+to apply mutation procedures like \ide{set-element!} to strings returned
 by this procedure.
 
 The following examples assume that the implementation's standard case is
@@ -2147,23 +2164,6 @@ arguments.  Analogous to {\cf list}.
 
 
 \begin{entry}{%
-\proto{vector-set!}{ vector k obj}{procedure}}
-
-\domain{\vr{k} must be a valid index of \var{vector}.}
-{\cf Vector-set!} stores \var{obj} in element \vr{k} of \var{vector}.
-The value returned by {\cf vector-set!}\ is unspecified.  % <!>
-
-\begin{scheme}
-(let ((vec (vector 0 '(2 2 2 2) "Anna")))
-  (vector-set! vec 1 '("Sue" "Sue"))
-  vec)      \lev  \#(0 ("Sue" "Sue") "Anna")
-
-(vector-set! '\#(0 1 2) 1 "doe")  \lev  \scherror  ; constant vector%
-\end{scheme}
-\end{entry}
-
-
-\begin{entry}{%
 \proto{vector->list}{ vector}{library procedure}
 \proto{list->vector}{ list}{library procedure}}
 
@@ -2381,7 +2381,7 @@ last, and the value returned by {\cf for-each} is unspecified.
 \begin{scheme}
 (let ((v (make-vector 5)))
   (for-each (lambda (i)
-              (vector-set! v i (* i i)))
+              (set-element! v i (* i i)))
             '(0 1 2 3 4))
   v)                                \ev  \#(0 1 4 9 16)%
 \end{scheme}

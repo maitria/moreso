@@ -84,7 +84,7 @@ constants evaluate ``to themselves''; they need not be quoted.
 
 As noted in section~\ref{storagemodel}, it is an error to alter a constant
 (i.e.~the value of a literal expression) using a mutation procedure like
-{\cf set-car!}\ or {\cf vector-set!}.
+{\cf set-car!}\ or {\cf set-element!}.
 
 \end{entry}
 
@@ -639,7 +639,7 @@ been written instead of {\cf(\hyper{variable} \hyper{init})}.
 (do ((vec (make-vector 5))
      (i 0 (+ i 1)))
     ((= i 5) vec)
-  (vector-set! vec i i))          \ev  \#(0 1 2 3 4)
+  (set-element! vec i i))          \ev  \#(0 1 2 3 4)
 
 (let ((x '(1 3 5 7 9)))
   (do ((x x (cdr x))

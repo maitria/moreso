@@ -70,7 +70,7 @@ produces a new system state.
                 (lambda (i)
                   (cond ((= i size) ans)
                         (else
-                         (vector-set! ans i (proc i))
+                         (set-element! ans i (proc i))
                          (loop (+ i 1)))))))
         (loop 0)))))
 

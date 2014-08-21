@@ -96,7 +96,7 @@
     _OP_DEF(opexe_2, "vector",                         0,  INF_ARG, TST_NONE,                        OP_VECTOR           )
     _OP_DEF(opexe_2, "make-vector",                    1,  2,       TST_NATURAL TST_ANY,             OP_MKVECTOR         )
     _OP_DEF(opexe_2, "element",                        2,  2,       TST_SEQUENCE TST_NATURAL,        OP_ELEMENT          )
-    _OP_DEF(opexe_2, "vector-set!",                    3,  3,       TST_VECTOR TST_NATURAL TST_ANY,  OP_VECSET           )
+    _OP_DEF(opexe_2, "set-element!",                   3,  3,       TST_VECTOR TST_NATURAL TST_ANY,  OP_SETELEMENT       )
     _OP_DEF(opexe_3, "not",                            1,  1,       TST_NONE,                        OP_NOT              )
     _OP_DEF(opexe_3, "boolean?",                       1,  1,       TST_NONE,                        OP_BOOLP            )
     _OP_DEF(opexe_3, "eof-object?",                    1,  1,       TST_NONE,                        OP_EOFOBJP          )

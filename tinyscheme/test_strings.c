@@ -86,7 +86,7 @@ void check_vector_ref()
 
 void check_vector_length()
 {
-	check("(vector-length \"abc\")", "3");
+	check("(length \"abc\")", "3");
 }
 
 int main(int argc, char **argv)

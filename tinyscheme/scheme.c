@@ -165,6 +165,7 @@ static num num_one;
 
 static int is_list(scheme *sc, pointer p);
 int is_vector(pointer p)    { return (type(p)==T_VECTOR); }
+
 static void fill_vector(pointer vec, pointer obj);
 static pointer vector_ref(pointer vec, int ielem);
 static void vector_set_x(pointer vec, int ielem, pointer a);
@@ -3540,9 +3541,6 @@ static pointer opexe_2(scheme *sc, enum scheme_opcodes op) {
           s_return(sc,vec);
      }
 
-     case OP_VECLEN:  /* vector-length */
-	s_return(sc,mk_integer(sc,vector_length(car(sc->args))));
-
      case OP_VECREF: { /* vector-ref */
 	int index;
 
@@ -4275,12 +4273,16 @@ static pointer opexe_6(scheme *sc, enum scheme_opcodes op) {
      long v;
 
      switch (op) {
-     case OP_LIST_LENGTH:     /* length */   /* a.k */
-          v=list_length(sc,car(sc->args));
-          if(v<0) {
-               Error_1(sc,"length: not a list:",car(sc->args));
-          }
-          s_return(sc,mk_integer(sc, v));
+     case OP_LENGTH:     /* length */   /* a.k */
+	  if (is_vector(car(sc->args))) {
+		  s_return(sc,mk_integer(sc,vector_length(car(sc->args))));
+	  } else {
+		  v=list_length(sc,car(sc->args));
+		  if(v<0) {
+		       Error_1(sc,"length: not a list:",car(sc->args));
+		  }
+		  s_return(sc,mk_integer(sc, v));
+	  }
 
      case OP_ASSQ:       /* assq */     /* a.k */
           x = car(sc->args);
@@ -4352,7 +4354,7 @@ static struct {
   {is_vector, "vector"},
   {is_number, "number"},
   {is_integer, "integer"},
-  {is_nonneg, "non-negative integer"}
+  {is_nonneg, "non-negative integer"},
 };
 
 #define TST_NONE 0

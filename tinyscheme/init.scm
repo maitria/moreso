@@ -146,7 +146,7 @@
 
 ; Note the trick of returning (cmp x y)
 (define (string-cmp? chcmp cmp a b)
-     (let ((na (vector-length a)) (nb (vector-length b)))
+     (let ((na (length a)) (nb (length b)))
           (let loop ((i 0))
                (cond
                     ((= i na)
@@ -229,8 +229,8 @@
 (define (tail stream) (force (cdr stream)))
 
 (define (vector-equal? x y)
-     (and (vector? x) (vector? y) (= (vector-length x) (vector-length y))
-          (let ((n (vector-length x)))
+     (and (vector? x) (vector? y) (= (length x) (length y))
+          (let ((n (length x)))
                (let loop ((i 0))
                     (if (= i n)
                          #t
@@ -241,14 +241,14 @@
      (apply vector x))
 
 (define (vector-fill! v e)
-     (let ((n (vector-length v)))
+     (let ((n (length v)))
           (let loop ((i 0))
                (if (= i n)
                     v
                     (begin (vector-set! v i e) (loop (succ i)))))))
 
 (define (vector->list v)
-     (let loop ((n (pred (vector-length v))) (l '()))
+     (let loop ((n (pred (length v))) (l '()))
           (if (= n -1)
                l
                (loop (pred n) (cons (vector-ref v n) l)))))

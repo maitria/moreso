@@ -166,6 +166,11 @@ static num num_one;
 static int is_list(scheme *sc, pointer p);
 int is_vector(pointer p)    { return (type(p)==T_VECTOR); }
 
+static int is_sequence(scheme *sc, pointer p)
+{
+	return is_list(sc, p) || is_vector(p);
+}
+
 static void fill_vector(pointer vec, pointer obj);
 static pointer vector_ref(pointer vec, int ielem);
 static void vector_set_x(pointer vec, int ielem, pointer a);
@@ -4355,6 +4360,7 @@ static struct {
   {is_number, "number"},
   {is_integer, "integer"},
   {is_nonneg, "non-negative integer"},
+  {0, "sequence"}
 };
 
 #define TST_NONE 0
@@ -4372,6 +4378,7 @@ static struct {
 #define TST_NUMBER "\014"
 #define TST_INTEGER "\015"
 #define TST_NATURAL "\016"
+#define TST_SEQUENCE "\017"
 
 typedef struct {
   dispatch_func func;
@@ -4433,7 +4440,9 @@ static void Eval_Cycle(scheme *sc, enum scheme_opcodes op) {
             pointer arg=car(arglist);
             j=(int)t[0];
             if(j==TST_LIST[0]) {
-                  if(arg!=sc->NIL && !is_pair(arg)) break;
+                if (!is_list(sc, arg)) break;
+            } else if (j == TST_SEQUENCE[0]) {
+                if (!is_sequence(sc, arg)) break;
             } else {
               if(!tests[j].fct(arg)) break;
             }

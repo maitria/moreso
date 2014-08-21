@@ -153,10 +153,10 @@
                          (if (= i nb) (cmp 0 0) (cmp 0 1)))
                     ((= i nb)
                          (cmp 1 0))
-                    ((chcmp = (vector-ref a i) (vector-ref b i))
+                    ((chcmp = (element a i) (element b i))
                          (loop (succ i)))
                     (else
-                         (chcmp cmp (vector-ref a i) (vector-ref b i)))))))
+                         (chcmp cmp (element a i) (element b i)))))))
 
 
 (define (string=? a b) (string-cmp? char-cmp? = a b))
@@ -234,7 +234,7 @@
                (let loop ((i 0))
                     (if (= i n)
                          #t
-                         (and (equal? (vector-ref x i) (vector-ref y i))
+                         (and (equal? (element x i) (element y i))
                               (loop (succ i))))))))
 
 (define (list->vector x)
@@ -251,7 +251,7 @@
      (let loop ((n (pred (length v))) (l '()))
           (if (= n -1)
                l
-               (loop (pred n) (cons (vector-ref v n) l)))))
+               (loop (pred n) (cons (element v n) l)))))
 
 ;; The following quasiquote macro is due to Eric S. Tiedemann.
 ;;   Copyright 1988 by Eric S. Tiedemann; all rights reserved.

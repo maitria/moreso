@@ -56,46 +56,12 @@ void check(char *expression, char *expect)
 	scheme_deinit(sc);
 }
 
-void check_string_p_returns_t_for_char_vectors()
-{
-	check("(string? '#(#\\a #\\b #\\c))", "#t");
-	check("(string? '#())", "#t");
-	check("(string? '#(#\\a #\\b 42))", "#f");
-	check("(string? 42)", "#f");
-}
-
-void check_subvector_works()
-{
-	check("(subvector #(#\\a #\\b #\\c) 1 2)", "#(#\\b)");
-	check("(subvector #(#\\a #\\b #\\c) 1)", "#(#\\b #\\c)");
-	check("(subvector #(#\\a #\\b #\\c) 0)", "#(#\\a #\\b #\\c)");
-	check("(subvector #(#\\a #\\b #\\c) 3)", "#()");
-	check("(subvector #(1 2 3) 1 2)", "#(2)");
-}
-
-void check_vector_copy()
-{
-	check("(vector-append #(#\\a 2 #\\c))", "#(#\\a 2 #\\c)");
-	check("(vector-append #(#\\a 3 #\\c) #(5 #f))", "#(#\\a 3 #\\c 5 #f)");
-}
-
-void check_element()
-{
-	check("(element \"abc\" 1)", "#\\b");
-}
-
-void check_length()
-{
-	check("(length \"abc\")", "3");
-}
-
 int main(int argc, char **argv)
 {
-	check_string_p_returns_t_for_char_vectors();
-	check_subvector_works();
-	check_vector_copy();
-	check_element();
-	check_length();
+	check("(length '(1 2 3))", "3");
+	check("(length '#(1 2))", "2");
+	check("(element '(1 2) 0)", "1");
+	check("(element '(1 2) 1)", "2");
 
 	printf(" %d tests, %d failed, %d errors.\n", check_count, fail_count, error_count);
 	if (fail_count == 0 && error_count == 0)

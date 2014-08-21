@@ -3546,14 +3546,25 @@ static pointer opexe_2(scheme *sc, enum scheme_opcodes op) {
           s_return(sc,vec);
      }
 
-     case OP_VECREF: { /* vector-ref */
+     case OP_ELEMENT: { /* element */
 	int index;
 
-	index=ivalue(cadr(sc->args));
-	if(index>=ivalue(car(sc->args)))
-		Error_1(sc,"vector-ref: out of bounds:",cadr(sc->args));
+	index = ivalue(cadr(sc->args));
 
-	s_return(sc,vector_ref(car(sc->args),index));
+	if (is_vector(car(sc->args))) {
+		if (index >= ivalue(car(sc->args)))
+			Error_1(sc, "element: out of bounds:", cadr(sc->args));
+
+		s_return(sc, vector_ref(car(sc->args), index));
+	} else {
+		for (x = car(sc->args); index > 0 && is_pair(x); --index, x = cdr(x))
+			;
+		
+		if (0 != index || !is_pair(x))
+			Error_1(sc, "element: out of bounds:", cadr(sc->args));
+
+		s_return(sc, car(x));
+	}
      }
 
      case OP_VECSET: {   /* vector-set! */

@@ -216,9 +216,6 @@
         x
         (list-tail (cdr x) (- k 1))))
 
-(define (list-ref x k)
-    (car (list-tail x k)))
-
 (define (last-pair x)
     (if (pair? (cdr x))
         (last-pair (cdr x))

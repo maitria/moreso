@@ -119,7 +119,6 @@
 	     (vector-length seq)
 	     (length seq))) "length" 1)
     (def list-tail "list-tail" 2)
-    (def list-ref "list-ref" 2)
     (def* append '("append" "%%append") 1)
     (def reverse "reverse" 1)
     (def memq "memq" 2)

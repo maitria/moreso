@@ -3482,7 +3482,7 @@ static pointer opexe_2(scheme *sc, enum scheme_opcodes op) {
           }
         }
 
-     case OP_VECTOR_APPEND: /* vector-append */
+     case OP_AS_VECTOR: /* as-vector */
 	s_return(sc, vector_append(sc, sc->args));
 
      case OP_SUBVECTOR: { /* subvector */

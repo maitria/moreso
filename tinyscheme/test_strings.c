@@ -17,10 +17,10 @@ void check_subvector_works()
 	check("(subvector #(1 2 3) 1 2)", "#(2)");
 }
 
-void check_vector_copy()
+void check_as_vector()
 {
-	check("(vector-append #(#\\a 2 #\\c))", "#(#\\a 2 #\\c)");
-	check("(vector-append #(#\\a 3 #\\c) #(5 #f))", "#(#\\a 3 #\\c 5 #f)");
+	check("(as-vector #(#\\a 2 #\\c))", "#(#\\a 2 #\\c)");
+	check("(as-vector #(#\\a 3 #\\c) #(5 #f))", "#(#\\a 3 #\\c 5 #f)");
 }
 
 void check_element()
@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 {
 	check_string_p_returns_t_for_char_vectors();
 	check_subvector_works();
-	check_vector_copy();
+	check_as_vector();
 	check_element();
 	check_length();
 	finish(argv[0]);

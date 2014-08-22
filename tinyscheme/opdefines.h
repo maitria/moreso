@@ -91,7 +91,7 @@
     _OP_DEF(opexe_2, "atom->string",                   1,  2,       TST_ANY TST_NATURAL,             OP_ATOM2STR         )
     _OP_DEF(opexe_2, "string->symbol",                 1,  1,       TST_STRING,                      OP_STR2SYM          )
     _OP_DEF(opexe_2, "string->atom",                   1,  2,       TST_STRING TST_NATURAL,          OP_STR2ATOM         )
-    _OP_DEF(opexe_2, "vector-append",                  0,  INF_ARG, TST_VECTOR,                      OP_VECTOR_APPEND    )
+    _OP_DEF(opexe_2, "as-vector",                      0,  INF_ARG, TST_VECTOR,                      OP_AS_VECTOR        )
     _OP_DEF(opexe_2, "subvector",                      2,  3,       TST_VECTOR TST_NATURAL,          OP_SUBVECTOR        )
     _OP_DEF(opexe_2, "vector",                         0,  INF_ARG, TST_NONE,                        OP_VECTOR           )
     _OP_DEF(opexe_2, "make-vector",                    1,  2,       TST_NATURAL TST_ANY,             OP_MKVECTOR         )

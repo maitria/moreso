@@ -139,7 +139,6 @@
     _OP_DEF(opexe_4, 0,                                0,  0,       0,                               OP_ERR1             )
     _OP_DEF(opexe_4, "reverse",                        1,  1,       TST_LIST,                        OP_REVERSE          )
     _OP_DEF(opexe_4, "list*",                          1,  INF_ARG, TST_NONE,                        OP_LIST_STAR        )
-    _OP_DEF(opexe_4, "append",                         0,  INF_ARG, TST_NONE,                        OP_APPEND           )
 #if USE_PLIST
     _OP_DEF(opexe_4, "put",                            3,  3,       TST_NONE,                        OP_PUT              )
     _OP_DEF(opexe_4, "get",                            2,  2,       TST_NONE,                        OP_GET              )

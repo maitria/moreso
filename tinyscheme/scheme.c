@@ -3836,25 +3836,6 @@ static pointer opexe_4(scheme *sc, enum scheme_opcodes op) {
      case OP_LIST_STAR: /* list* */
           s_return(sc,list_star(sc,sc->args));
 
-     case OP_APPEND:    /* append */
-          x = sc->NIL;
-          y = sc->args;
-          if (y == x) {
-              s_return(sc, x);
-          }
-
-          /* cdr() in the while condition is not a typo. If car() */
-          /* is used (append '() 'a) will return the wrong result.*/
-          while (cdr(y) != sc->NIL) {
-              x = revappend(sc, x, car(y));
-              y = cdr(y);
-              if (x == sc->F) {
-                  Error_0(sc, "non-list argument to append");
-              }
-          }
-
-          s_return(sc, reverse_in_place(sc, car(y), x));
-
 #if USE_PLIST
      case OP_PUT:        /* put */
           if (!hasprop(car(sc->args)) || !hasprop(cadr(sc->args))) {

@@ -237,7 +237,6 @@
 	   (%void)) "set-element!" 3)
     (def* vector '("vector" "%%vector") 0)
     (def vector->list "vector->list" 1)
-    (def list->vector '("list->vector" "%%list->vector") 1)
     (def (lambda (x y) (vector-fill! x y) (%void)) "vector-fill!" 2)
     (def %procedure? "procedure?" 1)
     (def* (lambda (proc . args)

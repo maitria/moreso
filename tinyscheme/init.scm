@@ -238,6 +238,37 @@
                     v
                     (begin (vector-set! v i e) (loop (succ i)))))))
 
+(define (as-list . sequences)
+  (define result (cons #f '()))
+  (define (add obj)
+    (set-cdr! (car result) (cons obj '()))
+    (set-car! result (cdar result)))
+  (set-car! result result)
+
+  (let s-loop ((sequences sequences))
+    (cond
+      ((null? sequences)
+       (cdr result))
+
+      ((vector? (car sequences))
+       (let v-loop ((i 0))
+	 (cond
+	   ((= i (length (car sequences))))
+
+	   (else
+	     (add (element (car sequences) i))
+	     (v-loop (+ i 1)))))
+       (s-loop (cdr sequences)))
+
+      (else
+       (let l-loop ((l (car sequences)))
+	 (if (null? l)
+	   #f
+	   (begin
+	     (add (car l))
+	     (l-loop (cdr l)))))
+       (s-loop (cdr sequences))))))
+
 (define (vector->list v)
      (let loop ((n (pred (length v))) (l '()))
           (if (= n -1)

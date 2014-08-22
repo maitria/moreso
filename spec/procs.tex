@@ -1699,31 +1699,6 @@ sequences.
 
 
 \begin{entry}{%
-\proto{append}{ list \dotsfoo}{library procedure}}
-
-\nodomain{All \var{list}s should be lists.}
-Returns a list consisting of the elements of the first \var{list}
-followed by the elements of the other \var{list}s.
-
-\begin{scheme}
-(append '(x) '(y))              \ev  (x y)
-(append '(a) '(b c d))          \ev  (a b c d)
-(append '(a (b)) '((c)))        \ev  (a (b) (c))%
-\end{scheme}
-
-The resulting list is always newly allocated, except that it shares
-structure with the last \var{list} argument.  The last argument may
-actually be any object; an improper list results if the last argument is not a
-proper list.  \todo{This is pretty awkward.  I should get Bartley to fix this.}
-
-\begin{scheme}
-(append '(a b) '(c . d))        \ev  (a b c . d)
-(append '() 'a)                 \ev  a%
-\end{scheme}
-\end{entry}
-
-
-\begin{entry}{%
 \proto{reverse}{ list}{library procedure}}
 
 \nodomain{\var{List} must be a list.}
@@ -2312,7 +2287,7 @@ Returns \schtrue{} if \var{obj} is a procedure, otherwise returns \schfalse.
 
 \domain{\var{Proc} must be a procedure and \var{args} must be a list.}
 Calls \var{proc} with the elements of the list
-{\cf(append (list \vari{arg} \dotsfoo) \var{args})} as the actual
+{\cf(as-list (list \vari{arg} \dotsfoo) \var{args})} as the actual
 arguments.
 
 \begin{scheme}

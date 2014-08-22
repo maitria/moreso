@@ -209,7 +209,6 @@
     (def char-vector? "string?" 1)
     (def* subvector "subvector" 2)
     (def* vector-append "vector-append" 0)
-    (def (cut subvector <> 0) "vector-copy" 1)
     (def (char-vector-compare =) "string=?" 2)
     (def (char-vector-compare >) "string>?" 2)
     (def (char-vector-compare <) "string<?" 2)

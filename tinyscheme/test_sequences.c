@@ -8,6 +8,8 @@ int main(int argc, char **argv)
 	check("(element '(1 2) 1)", "2");
 	check("(let ((v (vector 1 2 3))) (set-element! v 1 42) v)",
 	      "#(1 42 3)");
+	check("(let ((l (list 1 2 3))) (set-element! l 1 42) l)",
+	      "(1 42 3)");
 
 	finish(argv[0]);
 }

@@ -3570,16 +3570,30 @@ static pointer opexe_2(scheme *sc, enum scheme_opcodes op) {
      case OP_SETELEMENT: {   /* set-element! */
           int index;
 
-          if (is_immutable(car(sc->args))) {
-               Error_1(sc,"set-element!: unable to alter immutable vector:",car(sc->args));
-          }
+          index = ivalue(cadr(sc->args));
 
-          index=ivalue(cadr(sc->args));
-          if (index >= ivalue(car(sc->args))) {
-               Error_1(sc,"set-element!: out of bounds:",cadr(sc->args));
-          }
+          if (is_vector(car(sc->args))) {
+                  if (is_immutable(car(sc->args))) {
+                        Error_1(sc,"set-element!: unable to alter immutable vector:",car(sc->args));
+                  }
 
-          vector_set_x(car(sc->args), index, caddr(sc->args));
+                  if (index >= ivalue(car(sc->args))) {
+                       Error_1(sc,"set-element!: out of bounds:",cadr(sc->args));
+                  }
+
+                  vector_set_x(car(sc->args), index, caddr(sc->args));
+          } else {
+                  for (x = car(sc->args); index > 0 && is_pair(x); --index, x = cdr(x))
+                          ;
+
+                  if (0 != index || !is_pair(x))
+                          Error_1(sc, "set-element!: out of bounds:", cadr(sc->args));
+
+                  if (is_immutable(x))
+                          Error_1(sc, "set-element!: object is immutable", x);
+
+                  set_car(x, caddr(sc->args));
+          }
           s_return(sc,car(sc->args));
      }
 

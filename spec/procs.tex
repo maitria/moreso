@@ -2164,33 +2164,22 @@ arguments.  Analogous to {\cf list}.
 
 
 \begin{entry}{%
-\proto{vector->list}{ vector}{library procedure}
-\proto{list->vector}{ list}{library procedure}}
+\proto{vector->list}{ vector}{library procedure}}
 
-{\cf Vector->list} returns a newly allocated list of the objects contained
-in the elements of \var{vector}.  {\cf List->vector} returns a newly
-created vector initialized to the elements of the list \var{list}.
+Returns a newly allocated list of the objects contained in the elements
+of \var{vector}.
 
 \begin{scheme}
 (vector->list '\#(dah dah didah))  \lev  (dah dah didah)
-(list->vector '(dididit dah))   \lev  \#(dididit dah)%
 \end{scheme}
 \end{entry}
 
 
 \begin{entry}{%
-\proto{vector-copy}{ vector}{library procedure}}
-
-Returns a newly allocated copy of the given \var{vector}.
-
-\end{entry}
-
-
-\begin{entry}{%
-\proto{vector-append}{ \var{vector} \dotsfoo}{library procedure}}
+\proto{as-vector}{ \var{sequence} \dotsfoo}{library procedure}}
 
 Returns a newly allocated vector whose elements form the concatenation of the
-given vectors.
+given sequences.
 
 \end{entry}
 

@@ -1058,22 +1058,36 @@ static void vector_set_x(pointer vec, int ielem, pointer a)
 	}
 }
 
-static pointer vector_append(scheme *sc, pointer vectors)
+static pointer as_vector(scheme *sc, pointer sequences)
 {
-	int i, offset, length;
-	pointer x, result;
+	int i, offset, length, part_length;
+	pointer x, a, result;
 
 	length = 0;
-	for (x = vectors; x != sc->NIL; x = cdr(x))
-		length += vector_length(car(x));
+	for (x = sequences; x != sc->NIL; x = cdr(x)) {
+		if (is_vector(car(x)))
+			length += vector_length(car(x));
+		else {
+			part_length = list_length(sc, car(x));
+			if (part_length < 0)
+				return sc->F;
+
+			length += part_length;
+		}
+	}
 
 	result = mk_vector(sc, length);
 	offset = 0;
-	for (x = vectors; x != sc->NIL; x = cdr(x)) {
-		for (i = 0; i < vector_length(car(x)); ++i)
-			vector_set_x(result, offset+i, vector_ref(car(x), i));
+	for (x = sequences; x != sc->NIL; x = cdr(x)) {
+		if (is_vector(car(x))) {
+			for (i = 0; i < vector_length(car(x)); ++i)
+				vector_set_x(result, offset+i, vector_ref(car(x), i));
 
-		offset += ivalue_unchecked(car(x));
+			offset += ivalue_unchecked(car(x));
+		} else {
+			for (a = car(x); a != sc->NIL; ++offset, a = cdr(a))
+				vector_set_x(result, offset, car(a));
+		}
 	}
 
 	return result;
@@ -3483,7 +3497,7 @@ static pointer opexe_2(scheme *sc, enum scheme_opcodes op) {
         }
 
      case OP_AS_VECTOR: /* as-vector */
-	s_return(sc, vector_append(sc, sc->args));
+	s_return(sc, as_vector(sc, sc->args));
 
      case OP_SUBVECTOR: { /* subvector */
 	pointer source;

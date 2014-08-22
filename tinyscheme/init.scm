@@ -185,8 +185,8 @@
             (cdr1 (cdar lists)))
         (unzip1-with-cdr-iterative
           (cdr lists)
-          (append cars (list car1))
-          (append cdrs (list cdr1))))))
+          (as-list cars (list car1))
+          (as-list cdrs (list cdr1))))))
 
 (define (map proc . lists)
   (if (null? lists)
@@ -297,7 +297,7 @@
                   (eq? (car r) 'quote)
                   (eq? (car (cdr r)) '())))
          l
-         (list 'append l r)))
+         (list 'as-list l r)))
    (define (foo level form)
      (cond ((not (pair? form))
                (if (or (procedure? form) (number? form) (string? form))

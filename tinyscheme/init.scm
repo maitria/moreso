@@ -269,12 +269,6 @@
 	     (l-loop (cdr l)))))
        (s-loop (cdr sequences))))))
 
-(define (vector->list v)
-     (let loop ((n (pred (length v))) (l '()))
-          (if (= n -1)
-               l
-               (loop (pred n) (cons (element v n) l)))))
-
 ;; The following quasiquote macro is due to Eric S. Tiedemann.
 ;;   Copyright 1988 by Eric S. Tiedemann; all rights reserved.
 ;;

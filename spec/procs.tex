@@ -1687,6 +1687,18 @@ Returns a newly allocated list of its arguments.
 
 
 \begin{entry}{%
+\proto{as-list}{ sequence \dotsfoo}{library procedure}}
+
+Returns a newly allocated list of the objects contained in the given
+sequences.
+
+\begin{scheme}
+(as-list '\#(dah dah didah) '(1))  \lev  (dah dah didah 1)
+\end{scheme}
+\end{entry}
+
+
+\begin{entry}{%
 \proto{append}{ list \dotsfoo}{library procedure}}
 
 \nodomain{All \var{list}s should be lists.}
@@ -2159,18 +2171,6 @@ arguments.  Analogous to {\cf list}.
 
 \begin{scheme}
 (vector 'a 'b 'c)               \ev  \#(a b c)%
-\end{scheme}
-\end{entry}
-
-
-\begin{entry}{%
-\proto{vector->list}{ vector}{library procedure}}
-
-Returns a newly allocated list of the objects contained in the elements
-of \var{vector}.
-
-\begin{scheme}
-(vector->list '\#(dah dah didah))  \lev  (dah dah didah)
 \end{scheme}
 \end{entry}
 

@@ -106,9 +106,6 @@
              0
              (abs (* (quotient aa (gcd aa bb)) bb)))))))
 
-(define (vector-copy str)
-     (vector-append str))
-
 (define (string->anyatom str pred)
      (let* ((a (string->atom str)))
        (if (pred a) a

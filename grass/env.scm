@@ -231,7 +231,7 @@
 	   (if (vector? s)
 	     (vector-ref s k)
 	     (list-ref s k))) "element" 2)
-    (def (lambda (x y z) (vector-set! x y z) (%void)) "vector-set!" 3)
+    (def (lambda (x y z) (vector-set! x y z) (%void)) "set-element!" 3)
     (def* vector '("vector" "%%vector") 0)
     (def vector->list "vector->list" 1)
     (def list->vector '("list->vector" "%%list->vector") 1)

@@ -234,9 +234,6 @@
                          (and (equal? (element x i) (element y i))
                               (loop (succ i))))))))
 
-(define (list->vector x)
-     (apply vector x))
-
 (define (vector-fill! v e)
      (let ((n (length v)))
           (let loop ((i 0))
